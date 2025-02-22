@@ -1,0 +1,42 @@
+esphome:
+  name: heat_meter
+  platform: ESP32
+  board: nodemcu-32s
+
+external_components:
+  - source: github://yourusername/yourrepo/landis_gyr_uh50
+    components: [ landis_gyr_uh50 ]
+
+uart:
+  id: uart_bus
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 2400
+  parity: EVEN
+  data_bits: 7
+
+landis_gyr_uh50:
+  id: heat_meter
+  uart_id: uart_bus
+  energy_sensor:
+    name: "Energy Usage"
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+  volume_sensor:
+    name: "Water Volume"
+    unit_of_measurement: "m³"
+    accuracy_decimals: 3
+  temp_in_sensor:
+    name: "Inlet Temperature"
+    unit_of_measurement: "°C"
+  temp_out_sensor:
+    name: "Outlet Temperature"
+    unit_of_measurement: "°C"
+
+wifi:
+  ssid: "YourWiFiSSID"
+  password: "YourWiFiPassword"
+
+api:
+ota:
+logger:
