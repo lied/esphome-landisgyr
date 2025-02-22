@@ -2,15 +2,21 @@
 #define LANDIS_GYR_UH50_H
 
 #include "esphome.h"
-#include "esphome/components/sensor/sensor.h"  // Explicit full path for esphome::sensor::Sensor
-#include "esphome/components/uart/uart.h"      // For uart::UARTComponent and uart::UARTDevice
+#include "esphome/components/uart/uart.h"  // For uart::UARTComponent and uart::UARTDevice
+
+// Use sensor.h since it works for you, and explicitly define the namespace
+namespace esphome {
+namespace sensor {
+class Sensor;
+}  // namespace sensor
+}  // namespace esphome
 
 namespace esphome {
 namespace landis_gyr_uh50 {
 
 class LandisGyrUH50 : public Component, public uart::UARTDevice {
  public:
-  LandisGyrUH50() = default;  // Default constructor for ESPHome
+  LandisGyrUH50() = default;
   void set_uart_parent(uart::UARTComponent *parent) { this->parent_ = parent; }
 
   void setup() override;
@@ -30,7 +36,7 @@ class LandisGyrUH50 : public Component, public uart::UARTDevice {
   std::vector<uint8_t> buffer_;
   void parse_data_();
 
-  uart::UARTComponent *parent_;  // Store the UART parent pointer
+  uart::UARTComponent *parent_;
 };
 
 }  // namespace landis_gyr_uh50
