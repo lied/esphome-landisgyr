@@ -8,8 +8,8 @@ void LandisGyrUH50::setup() {
 }
 
 void LandisGyrUH50::loop() {
-  while (this->available()) {  // Use UARTDevice's available() method
-    buffer_.push_back(this->read());  // Use UARTDevice's read() method
+  while (this->available()) {
+    buffer_.push_back(this->read());
   }
   if (!buffer_.empty() && buffer_.size() >= 100) {
     parse_data_();
