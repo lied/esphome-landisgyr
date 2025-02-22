@@ -1,6 +1,7 @@
 #pragma once
 
 #include "esphome.h"
+#include "esphome/components/sensor/sensor.h"
 
 namespace esphome {
 namespace sensor_meter_heating {

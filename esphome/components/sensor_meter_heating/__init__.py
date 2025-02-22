@@ -9,6 +9,7 @@ from esphome.const import (
 )
 
 DEPENDENCIES = ["uart"]
+AUTO_LOAD = ["sensor"]  # This ensures ESPHome loads the sensor component
 
 sensor_meter_heating_ns = cg.esphome_ns.namespace("sensor_meter_heating")
 SensorMeterHeating = sensor_meter_heating_ns.class_("SensorMeterHeating", cg.PollingComponent, uart.UARTDevice)
@@ -24,7 +25,7 @@ CONFIG_SCHEMA = cv.Schema({
         accuracy_decimals=2,
     ),
     cv.Optional(CONF_M3_SENSOR): sensor.sensor_schema(
-        unit_of_measurement="m³",  # Use "m³" as a string
+        unit_of_measurement="m³",
         icon=ICON_WATER,
         accuracy_decimals=2,
     ),
