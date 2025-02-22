@@ -1,19 +1,20 @@
+#pragma once
+
 #include "esphome.h"
 
-class SensorMeterHeating : public PollingComponent {
+namespace esphome {
+namespace sensor_meter_heating {
+
+class SensorMeterHeating : public PollingComponent, public uart::UARTDevice {
  public:
-  Sensor *sensor_kWh = new Sensor();
-  Sensor *sensor_m3 = new Sensor();
+  Sensor *sensor_kWh = nullptr;
+  Sensor *sensor_m3 = nullptr;
 
-  SensorMeterHeating() : PollingComponent(60000) {}  // Poll every 60 seconds
+  SensorMeterHeating() : PollingComponent(60000) {}  // Poll every 60s
 
-  float get_setup_priority() const override { return esphome::setup_priority::HARDWARE; }
-
-  void setup() override {
-    // Initialization code here
-  }
-
-  void update() override {
-    // Communication and data parsing code here
-  }
+  void setup() override;
+  void update() override;
 };
+
+}  // namespace sensor_meter_heating
+}  // namespace esphome

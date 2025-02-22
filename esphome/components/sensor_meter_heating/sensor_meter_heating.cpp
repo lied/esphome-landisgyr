@@ -1,21 +1,33 @@
 #include "sensor_meter_heating.h"
 
+namespace esphome {
+namespace sensor_meter_heating {
+
 void SensorMeterHeating::setup() {
-  // Setup UART communication
-  Serial2.begin(300, SERIAL_7E1, 16, 17);  // RX=16, TX=17
-  Serial2.setTimeout(1000);
+  ESP_LOGD("sensor_meter_heating", "Initializing...");
+  this->sensor_kWh = new Sensor();
+  this->sensor_m3 = new Sensor();
 }
 
 void SensorMeterHeating::update() {
-  // Send initialization message
+  ESP_LOGD("sensor_meter_heating", "Requesting data from meter...");
+
+  // Example: Sending request to the meter
   for (int i = 0; i <= 40; i++) {
-    Serial2.write(0x00);
+    this->write_byte(0x00);
   }
-  Serial2.write("\x2F\x3F\x21\x0D\x0A");
+  this->write_str("\x2F\x3F\x21\x0D\x0A");
 
-  // Add further communication handling and data parsing here
+  // Read and parse response here
+  // Example: Fake values for now
+  float kWh_value = 123.45;  // Replace with parsed data
+  float m3_value = 678.90;   // Replace with parsed data
 
-  // Example of publishing sensor values
-  sensor_kWh->publish_state(/* parsed kWh value */);
-  sensor_m3->publish_state(/* parsed m3 value */);
+  if (sensor_kWh) sensor_kWh->publish_state(kWh_value);
+  if (sensor_m3) sensor_m3->publish_state(m3_value);
+
+  ESP_LOGD("sensor_meter_heating", "Published kWh: %.2f, m3: %.2f", kWh_value, m3_value);
 }
+
+}  // namespace sensor_meter_heating
+}  // namespace esphome
