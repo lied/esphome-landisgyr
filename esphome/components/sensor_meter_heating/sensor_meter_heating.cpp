@@ -5,8 +5,8 @@ namespace sensor_meter_heating {
 
 void SensorMeterHeating::setup() {
   ESP_LOGD("sensor_meter_heating", "Initializing...");
-  this->sensor_kWh = new Sensor();
-  this->sensor_m3 = new Sensor();
+  this->sensor_kWh = new sensor::Sensor();
+  this->sensor_m3 = new sensor::Sensor();
 }
 
 void SensorMeterHeating::update() {
