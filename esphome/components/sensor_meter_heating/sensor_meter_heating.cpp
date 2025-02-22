@@ -1,30 +1,47 @@
 #include "sensor_meter_heating.h"
+#include "esphome/core/log.h"
 
 namespace esphome {
 namespace sensor_meter_heating {
 
+static const char *TAG = "sensor_meter_heating";
+
 void SensorMeterHeating::setup() {
-  ESP_LOGD("sensor_meter_heating", "Initializing...");
+  ESP_LOGD(TAG, "Initializing Landis+Gyr UH50/T555 Meter...");
 }
 
 void SensorMeterHeating::update() {
-  ESP_LOGD("sensor_meter_heating", "Requesting data from meter...");
+  ESP_LOGD(TAG, "Requesting data from meter...");
 
-  // Example: Sending request to the meter
-  for (int i = 0; i <= 40; i++) {
-    this->write_byte(0x00);
-  }
+  // Example request: Send a meter read command
   this->write_str("\x2F\x3F\x21\x0D\x0A");
 
-  // Read and parse response here
-  // Example: Fake values for now
-  float kWh_value = 123.45;  // Replace with parsed data
-  float m3_value = 678.90;   // Replace with parsed data
+  // Wait for response
+  std::string response;
+  while (this->available()) {
+    response += this->read();
+  }
 
-  if (sensor_kWh) sensor_kWh->publish_state(kWh_value);
-  if (sensor_m3) sensor_m3->publish_state(m3_value);
+  if (!response.empty()) {
+    this->parse_response(response);
+  }
+}
 
-  ESP_LOGD("sensor_meter_heating", "Published kWh: %.2f, m3: %.2f", kWh_value, m3_value);
+void SensorMeterHeating::parse_response(const std::string &response) {
+  ESP_LOGD(TAG, "Received response: %s", response.c_str());
+
+  // Simulated parsing logic (replace with actual parsing)
+  float kWh_value = 123.45;  // Replace with parsed value
+  float m3_value = 678.90;   // Replace with parsed value
+
+  if (this->sensor_kWh != nullptr) {
+    this->sensor_kWh->publish_state(kWh_value);
+  }
+  if (this->sensor_m3 != nullptr) {
+    this->sensor_m3->publish_state(m3_value);
+  }
+
+  ESP_LOGD(TAG, "Published kWh: %.2f, m³: %.2f", kWh_value, m3_value);
 }
 
 }  // namespace sensor_meter_heating

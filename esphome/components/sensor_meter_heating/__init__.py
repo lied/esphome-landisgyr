@@ -1,15 +1,10 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import sensor, uart
-from esphome.const import (
-    CONF_ID,
-    UNIT_KILOWATT_HOURS,
-    ICON_FLASH,
-    ICON_WATER,
-)
+from esphome.const import CONF_ID, UNIT_KILOWATT_HOURS, ICON_FLASH, ICON_WATER
 
 DEPENDENCIES = ["uart"]
-AUTO_LOAD = ["sensor"]  # This ensures ESPHome loads the sensor component
+AUTO_LOAD = ["sensor"]
 
 sensor_meter_heating_ns = cg.esphome_ns.namespace("sensor_meter_heating")
 SensorMeterHeating = sensor_meter_heating_ns.class_("SensorMeterHeating", cg.PollingComponent, uart.UARTDevice)
