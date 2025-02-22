@@ -8,28 +8,25 @@ namespace landis_gyr_uh50 {
 
 class LandisGyrUH50 : public Component, public UARTDevice {
  public:
-  // Constructor, taking UART as argument
-  LandisGyrUH50(UARTComponent *parent);
+  LandisGyrUH50() = default;  // Default constructor for ESPHome
+  void set_uart_parent(UARTComponent *parent) { this->parent_ = parent; }
 
-  // Setup and loop functions required by Component
   void setup() override;
   void loop() override;
 
-  // Method to set sensors from YAML config
   void set_energy_sensor(sensor::Sensor *sensor) { energy_sensor_ = sensor; }
   void set_volume_sensor(sensor::Sensor *sensor) { volume_sensor_ = sensor; }
   void set_temp_in_sensor(sensor::Sensor *sensor) { temp_in_sensor_ = sensor; }
   void set_temp_out_sensor(sensor::Sensor *sensor) { temp_out_sensor_ = sensor; }
 
  protected:
-  sensor::Sensor *energy_sensor_{nullptr};  // Energy consumption (kWh)
-  sensor::Sensor *volume_sensor_{nullptr};  // Volume (m³)
-  sensor::Sensor *temp_in_sensor_{nullptr}; // Inlet temperature (°C)
-  sensor::Sensor *temp_out_sensor_{nullptr}; // Outlet temperature (°C)
+  sensor::Sensor *energy_sensor_{nullptr};
+  sensor::Sensor *volume_sensor_{nullptr};
+  sensor::Sensor *temp_in_sensor_{nullptr};
+  sensor::Sensor *temp_out_sensor_{nullptr};
 
-  // Variables for parsing UART data (adjust as needed)
   std::vector<uint8_t> buffer_;
-  void parse_data_();  // Helper to process received data
+  void parse_data_();
 };
 
 }  // namespace landis_gyr_uh50
