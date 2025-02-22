@@ -34,11 +34,11 @@ void SensorMeterHeating::parse_response(const std::string &response) {
   float kWh_value = 123.45;  // Replace with parsed value
   float m3_value = 678.90;   // Replace with parsed value
 
-  if (this->sensor_kWh != nullptr) {
-    this->sensor_kWh->publish_state(kWh_value);
+  if (this->energy_sensor != nullptr) {
+    this->energy_sensor->publish_state(kWh_value);
   }
-  if (this->sensor_m3 != nullptr) {
-    this->sensor_m3->publish_state(m3_value);
+  if (this->volume_sensor != nullptr) {
+    this->volume_sensor->publish_state(m3_value);
   }
 
   ESP_LOGD(TAG, "Published kWh: %.2f, m³: %.2f", kWh_value, m3_value);

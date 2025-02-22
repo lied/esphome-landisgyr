@@ -9,14 +9,14 @@ namespace sensor_meter_heating {
 
 class SensorMeterHeating : public PollingComponent, public uart::UARTDevice {
  public:
-  sensor::Sensor *sensor_kWh{nullptr};
-  sensor::Sensor *sensor_m3{nullptr};
-
   SensorMeterHeating() : PollingComponent(60000) {}
 
   void setup() override;
   void update() override;
   void parse_response(const std::string &response);
+
+  sensor::Sensor *energy_sensor{nullptr};
+  sensor::Sensor *volume_sensor{nullptr};
 };
 
 }  // namespace sensor_meter_heating
