@@ -4,7 +4,7 @@
 #include "esphome.h"
 #include "sensor.h"                         // Works in your environment for esphome::sensor::Sensor
 #include "esphome/components/uart/uart.h"   // For uart::UARTComponent and uart::UARTDevice
-#include "/esphome/components/sensor/sensor.h"
+#include "/esphome/esphome/components/sensor/sensor.h"
 
 namespace esphome {
 namespace landis_gyr_uh50 {
