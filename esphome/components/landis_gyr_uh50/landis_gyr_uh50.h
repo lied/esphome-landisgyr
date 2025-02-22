@@ -2,14 +2,16 @@
 #define LANDIS_GYR_UH50_H
 
 #include "esphome.h"
+#include "esphome/components/sensor/sensor.h"  // For sensor::Sensor
+#include "esphome/components/uart/uart.h"      // For UARTComponent and UARTDevice
 
 namespace esphome {
 namespace landis_gyr_uh50 {
 
-class LandisGyrUH50 : public Component, public UARTDevice {
+class LandisGyrUH50 : public Component, public uart::UARTDevice {
  public:
   LandisGyrUH50() = default;  // Default constructor for ESPHome
-  void set_uart_parent(UARTComponent *parent) { this->parent_ = parent; }
+  void set_uart_parent(uart::UARTComponent *parent) { this->parent_ = parent; }
 
   void setup() override;
   void loop() override;
@@ -27,6 +29,8 @@ class LandisGyrUH50 : public Component, public UARTDevice {
 
   std::vector<uint8_t> buffer_;
   void parse_data_();
+
+  uart::UARTComponent *parent_;  // Store the UART parent pointer
 };
 
 }  // namespace landis_gyr_uh50
