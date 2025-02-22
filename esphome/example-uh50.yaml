@@ -12,10 +12,10 @@ external_components:
       type: git
       url: https://github.com/lied/esphome-landisgyr
       ref: main
-    components: [ landisgyr ]
+    components: [ sensor_meter_heating ]
     
 sensor:
-- platform: landisgyr
+- platform: sensor_meter_heating
   lambda: |-
     auto my_sensor = new SensorMeterHeating();
     App.register_component(my_sensor);
