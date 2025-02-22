@@ -2,7 +2,8 @@
 #define LANDIS_GYR_UH50_H
 
 #include "esphome.h"
-#include "esphome/components/sensor/sensor.h"  // Correct full path for esphome::sensor::Sensor
+// #include "esphome/components/sensor/sensor.h"  // Correct full path for esphome::sensor::Sensor
+#include "sensor.h"
 #include "esphome/components/uart/uart.h"      // For uart::UARTComponent and uart::UARTDevice
 
 namespace esphome {
