@@ -2,14 +2,9 @@
 #define LANDIS_GYR_UH50_H
 
 #include "esphome.h"
-#include "esphome/components/uart/uart.h"  // For uart::UARTComponent and uart::UARTDevice
-
-// Use sensor.h since it works for you, and explicitly define the namespace
-namespace esphome {
-namespace sensor {
-class Sensor;
-}  // namespace sensor
-}  // namespace esphome
+#include "sensor.h"                         // Works in your environment for esphome::sensor::Sensor
+#include "esphome/components/uart/uart.h"   // For uart::UARTComponent and uart::UARTDevice
+#include "esphome/components/sensor/sensor.h"
 
 namespace esphome {
 namespace landis_gyr_uh50 {
