@@ -9,7 +9,7 @@ namespace sensor_meter_heating {
 
 class SensorMeterHeating : public PollingComponent, public uart::UARTDevice {
  public:
-  SensorMeterHeating() : PollingComponent(60000) {}
+  SensorMeterHeating() : PollingComponent(60000) {}  // Update every 60 seconds
 
   void setup() override;
   void update() override;
