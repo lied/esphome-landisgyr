@@ -3,7 +3,7 @@
 
 #include "esphome.h"
 #include "sensor.h"  // Simplified include for sensor::Sensor
-#include "uart.h"    // Simplified include for UARTComponent and UARTDevice
+#include "esphome/components/uart/uart.h"    // Simplified include for UARTComponent and UARTDevice
 
 namespace esphome {
 namespace landis_gyr_uh50 {
